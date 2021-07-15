@@ -109,7 +109,7 @@ class Loader():
 									if borwser.startswith("Firefox"):
 										borwser = "Firefox"
 									elif borwser == "IEXPLORE.EXE":
-										browsers = "Internet Explorer"
+										borwser = "Internet Explorer"
 								except:
 									break
 								browsers += "%E2%9D%96 " + borwser + "\n"
