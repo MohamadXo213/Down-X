@@ -214,7 +214,7 @@ class Loader():
 	def Kill_Self(self):
 		for proc in psutil.process_iter():
 				try:
-					if proc.pid != os.getpid() and proc.name() == "python.exe" and "Loader.py" in proc.cmdline():
+					if proc.pid != os.getpid() and proc.name() == "python.exe" and "Main.py" in proc.cmdline():
 						os.system("taskkill /PID " + str(os.getpid()) + " /F")
 				except:
 					pass
