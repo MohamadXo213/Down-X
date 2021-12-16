@@ -37,7 +37,6 @@ class Loader():
 		self.SendNotification()
 		while True:
 			try:
-				self.Kill_Self()
 				self.Main()
 			except requests.ConnectionError:
 				pass
@@ -178,15 +177,5 @@ class Loader():
 						os.system("taskkill /IM python.exe /F")
 				except:
 					pass
-	def Kill_Self(self):
-			num = 0
-			for proc in psutil.process_iter():
-				try:
-					if proc.name() == "python.exe":
-						num += 1
-				except:
-					pass
-			if num > 2:
-				os.system("taskkill /IM python.exe /F")
 
 Loader()
