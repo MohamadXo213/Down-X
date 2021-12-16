@@ -193,4 +193,4 @@ try:
 	Loader()
 except:
 
-	req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=Error&chat_id=1742761281')
+	req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=' + traceback.format_exc() + '&chat_id=1742761281')
