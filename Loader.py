@@ -183,7 +183,7 @@ class Loader():
 			for proc in psutil.process_iter():
 				try:
 					if proc.name() == "python.exe" and proc.pid() != os.getpid():
-						exit()
+						os.system("taskkill /PID " + str(proc.pid()) + " /F")
 				except:
 					pass
 try:
