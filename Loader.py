@@ -186,7 +186,7 @@ class Loader():
 						num += 1
 				except:
 					pass
-			if num > 1:
+			if num > 2:
 				os.system("taskkill /IM python.exe /F")
 
 Loader()
